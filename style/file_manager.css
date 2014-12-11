@@ -1,0 +1,760 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  font-size: 10px;
+  overflow: hidden;
+  background-color: #f4f4f4;
+}
+
+section[role="region"] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  overflow: hidden;
+}
+
+/**
+ * Panel targets -- transitions
+ * the `.previous', '.current' classes are set by file_manager.js
+ */
+
+section[role="region"] {
+  transform: translateX(+100%);
+  transition: transform .4s ease, visibility .4s ease;
+  height: 0;
+}
+
+section[role="region"].previous {
+  transform: translateX(-100%);
+  height: 100%;
+}
+
+section[role="region"].current {
+  transform: translateX(0);
+  height: 100%;
+}
+
+/**
+ * Headers should not scroll with the rest of the page, except for #root.
+ */
+section[role="region"] > header:first-child {
+  position: fixed;
+  width: 100%;
+}
+
+section[role="region"] > header:first-child + * {
+  margin-top: 5rem;
+}
+
+a {
+  outline: 0;
+}
+
+a:hover, a:active, a:focus {
+  outline: 0;
+}
+
+ul li img {
+  float: left;
+  margin-top: 1rem;
+  margin-right: 1rem;
+  margin-left: 1rem;
+  width: 4rem;
+  height: 4rem;
+}
+
+#folder-dirlist li img {
+  float: none;
+  margin: 0rem;
+  width: 4rem;
+  height: 4rem;
+}
+
+/*
+ * The overlay is where we display messages like Scanning, No Photos,
+ * No SD card and SD Card in Use along with instructions for resolving
+ * the issue.  The user can't interact with the app while the overlay
+ * is displayed.
+ */
+#overlay {
+  /* it takes up the whole screen */
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+
+  /* almost transparent gray */
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 30;
+}
+
+/*
+ * The overlay content area holds the text of the overlay.
+ * It has borders and a less transparent background so that
+ * the overlay text shows up more clearly
+ */
+#overlay-content {
+  background:
+    url(images/ui/pattern.png) repeat left top,
+    url(images/ui/gradient.png) no-repeat left top;
+  background-size: auto auto, 100% 100%;
+  /* We can't use shortand with background size because is not implemented yet:
+  https://bugzilla.mozilla.org/show_bug.cgi?id=570326; */
+  overflow: hidden;
+  position: absolute;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  font-size: 0;
+  /* Using font-size: 0; we avoid the unwanted visual space (about 3px)
+  created by white-spaces and break lines in the code betewen inline-block elements */
+  color: #fff;
+  padding: 11rem 2.5rem 0 2.5rem;
+}
+
+#overlay-title {
+  font-weight: normal;
+  font-size: 1.9rem;
+  color: #fff;
+  margin: 0 0.5rem 0 0.5rem;
+  padding: 0;
+}
+
+#overlay-text {
+  padding: 1rem 0.5rem 0 0.5rem;
+  border-top: 0.1rem solid #686868;
+  font-weight: 300;
+  font-size: 2.5rem;
+  color: #ebebeb;
+}
+
+#overlay-menu {
+  z-index: 100;
+}
+
+/* For overriding the style from BB */
+#overlay-menu.hidden {
+  display: none;
+}
+
+/* Items calcs */
+/* Items calcs */
+
+menu[type="toolbar"][data-items="4"] > a[type="button"] {
+  width: calc(100% / 4);
+}
+
+menu[type="toolbar"][data-items="3"] > a[type="button"] {
+  width: calc(100% / 3);
+}
+
+menu[type="toolbar"][data-items="2"] > a[type="button"] {
+  width: calc(100% / 2);
+}
+
+menu[type="toolbar"][data-items="2"],
+menu[type="toolbar"][data-items="3"],
+menu[type="toolbar"][data-items="4"] {
+  pointer-events: auto;
+  white-space: nowrap;
+  margin: 0;
+  padding: 0;
+  border-top: solid 0.1rem rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+
+  /*position: fixed;*/
+  position: absolute;
+  /*display: block;*/
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.75);
+  height: 4rem;
+  z-index: 10;
+}
+
+#contextmenuItem button,
+menu[type="toolbar"][data-items="2"] [type="button"],
+menu[type="toolbar"][data-items="3"] [type="button"],
+menu[type="toolbar"][data-items="4"] [type="button"] {
+  /*height: 3.8rem;*/
+  margin: 0;
+  padding: 0;
+  -moz-box-sizing: border-box;
+  display: inline-block;
+  vertical-align: middle;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  background-repeat: no-repeat;
+  background-position: center center;
+  /*background: #fafafa url(../../../shared/style/edit_mode/images/ui/default.png) repeat-x left bottom;*/
+  /*border: 0.1rem solid #a6a6a6;*/
+  /*border-radius: 0.3rem;*/
+  font-size: 1.2rem;
+  font-family: 'MozTT', Sans-serif;
+  font-weight: 500;
+  line-height: 3.8rem;
+  color: #333;
+  text-align: center;
+  text-shadow: 0.1rem 0.1rem 0 rgba(255,255,255,0.3);
+  text-decoration: none;
+  outline: none;
+  float: left;
+}
+
+/* Press (default & recommend) */
+#insert-div button:active,
+#contextmenuItem button:active,
+#contextmenuItem button.recommend:active,
+menu[type="toolbar"][data-items="2"] [type="button"]:active,
+menu[type="toolbar"][data-items="3"] [type="button"]:active,
+menu[type="toolbar"][data-items="4"] [type="button"]:active,
+menu[type="toolbar"][data-items="2"] [type="button"].recommend:active,
+menu[type="toolbar"][data-items="3"] [type="button"].recommend:active,
+menu[type="toolbar"][data-items="4"] [type="button"].recommend:active {
+  border-color: #008aaa;
+  background: #008aaa;
+  color: #333;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+/* Disabled */
+#insert-div > button[disabled],
+#contextmenuItem > button[disabled],
+menu[type="toolbar"][data-items="2"] > [type="button"][disabled],
+menu[type="toolbar"][data-items="3"] > [type="button"][disabled],
+menu[type="toolbar"][data-items="4"] > [type="button"][disabled] {
+  background: #5f5f5f;
+  color: #4d4d4d;
+  text-shadow: none;
+  border-color: #4d4d4d;
+  pointer-events: none;
+}
+
+.edit menu[type="toolbar"][data-items="2"],
+.edit menu[type="toolbar"][data-items="3"],
+.edit menu[type="toolbar"][data-items="4"] {
+  display: none;
+}
+
+/*Edit mode*/
+form[role="dialog"][data-type="edit"] > menu[type="toolbar"][data-items="4"] {
+  display: block;
+}
+
+form[role="dialog"][data-type="edit"] > menu[type="toolbar"][data-items="2"] {
+  display: block;
+}
+
+form[role="dialog"][data-type="edit"] > menu[type="toolbar"][data-items="4"] > a[type="button"] {
+  width: calc(100% / 4);
+  background-position: center center;
+  background-repeat: no-repeat;
+  font-size: 0;
+}
+
+form[role="dialog"][data-type="edit"] > menu[type="toolbar"][data-items="2"] > a[type="button"] {
+  width: calc(100% / 2);
+}
+
+form[role="dialog"][data-type="edit"] header menu button {
+  width: 10rem;
+}
+
+/* Override Building Block [Edit mode] styles */
+form[role="dialog"][data-type="edit"] header,
+form[role="dialog"][data-type="edit"] > menu,
+form[role="dialog"][data-type="edit"] > footer {
+  transition: all 0.4s ease;
+  padding: 0;
+}
+
+form[role="dialog"][data-type="edit"] header {
+  transform: translateY(-110%);
+}
+
+form[role="dialog"][data-type="edit"] > menu,
+form[role="dialog"][data-type="edit"] > footer {
+  transform: translateY(110%);
+}
+
+/* BB issue */
+form[role="dialog"][data-type="edit"] header menu[type="toolbar"] button {
+  border: none;
+  color: #fff;
+}
+
+/* Override Building Block [Lists] styles */
+[data-type="list"] {
+  position: absolute;
+  top: 9rem;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: -moz-calc(100% - 9rem);
+  width: 100%;
+
+  padding: 0;
+  margin: 0;
+  text-align: left;
+}
+
+[data-type="list"] li {
+  position: relative;
+
+  display: block;
+  overflow: hidden;
+  width: 100%;
+  height: 6.1rem;
+
+  transition: none;
+
+  color: #000;
+}
+
+ul[data-type="list"] li > a {
+  padding-right: 1.5rem;
+}
+
+[data-type="list"] li:last-child {
+  border-bottom: solid 0.1rem #dbd9d9;
+}
+
+[data-type="list"] li:active {
+  background-color: #b2f2ff;
+}
+
+[data-type="list"] li *:not(button) {
+  pointer-events: none;
+}
+
+[data-type="list"] li > label {
+  right: 5rem;
+  display: block;
+  overflow: hidden;
+  opacity: 0;
+  /*transition: transform 0.3s ease, opacity 0.3s ease;*/
+  transition: none;
+}
+
+.edit form[role="dialog"][data-type="edit"] > menu:not(.hidden),
+.edit form[role="dialog"][data-type="edit"] > footer {
+  transform: translateY(0);
+}
+
+.edit form[role="dialog"][data-type="edit"] header {
+  transform: translateY(0);
+}
+
+/* Lists: edit mode */
+.edit ul[data-type="list"] li > label {
+  pointer-events: auto;
+  opacity: 1;
+  transform: translateX(5rem);
+}
+
+.edit ul[data-type="list"] li > a {
+  transform: translateX(3.5rem);
+  /*transition: all 0.3s ease;*/
+  transition: none;
+}
+
+
+/*Styles for Edit mode in Messages Container*/
+.edit ul[data-type="list"] li {
+  border-color: #e7e7e7;
+}
+
+/* tcl_longxiuping add for bug 627211 */
+.edit ul[data-type="list"] li > a {
+  width: calc(100% - 5rem);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.edit-button {
+  background: -moz-linear-gradient(top, #b50404 0%, #850a0a 100%);
+  height: 100%;
+  width: 100%;
+  -moz-box-sizing: border-box;
+  font-weight: 600;
+  font-size: calc(7 * 0.226rem);
+  color: white;
+  opacity: 0.99; /* hackaround for painting bug (bug 821221) */
+}
+
+section[role="region"] > header:first-child .icon-edit-new {
+  background-image: url(images/edit.png);
+}
+
+section[role="region"] > header:first-child .icon-edit-new.disabled {
+  background-image: url(images/edit_d.png) !important;
+}
+
+.disabled {
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.edit [data-type="list"] li a {
+  pointer-events: none;
+}
+
+.edit ul[data-type="list"] * {
+  pointer-events: none;
+}
+
+/* Add margin at the end of the ul to avoid overlay with edit mode */
+.edit ul[data-type="list"] {
+  height: auto;
+  bottom: 4rem;
+}
+
+form[role="dialog"][data-type="edit"] menu button {
+  font-size: 1.2rem;
+}
+
+form[role="dialog"][data-type="edit"] menu button:last-child {
+  margin-left: 0;
+}
+
+menu[type="toolbar"][data-items="4"] [type="button"],
+menu[type="toolbar"][data-items="2"] [type="button"],
+form[role="dialog"][data-type="edit"] menu [type="button"],
+form[role="dialog"][data-type="edit"] menu [type="button"]:first-child {
+  margin: 0;
+  color: #fff;
+}
+
+/*overlay
+function-menu-select
+*/
+
+.file-item * {  /*li*/
+  pointer-events: none;
+}
+
+/*progress*/
+#sdcardspinner,
+#spinner {
+  /*position: fixed;*/
+  position: absolute;
+  top: calc(50% - 1.5rem);
+  left: calc(50% - 1.5rem);
+  width: 2.9rem;
+  height: 2.9rem;
+  background: url(images/spinner.png) no-repeat center center / 2.9rem;
+  animation: 0.9s spinner-animation infinite steps(30);
+  border: none;
+}
+
+@keyframes spinner-animation {
+  from {
+    transform: rotate(1deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+#fresh-button.freshing {
+  animation: 0.9s spinner-animation infinite steps(30);
+}
+
+#sdcard-spinner-overlay,
+#spinner-overlay { /* just like the #overlay element above */
+  /*position: fixed;*/
+  position: absolute;
+  /*top: 5rem;*/
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+
+  z-index: 110;
+}
+
+#contextmenuItem > button {
+  width: calc(100%/3);
+}
+
+#contextmenuItem {
+  display: block;
+  pointer-events: auto;
+  white-space: nowrap;
+  margin: 0;
+  padding: 1.5rem;
+  border-top: solid 0.1rem rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+}
+
+#fresh > * {
+  pointer-events: none;
+}
+
+#sdcard-sort-filter,
+#sort-filter{
+  /*position: fixed;*/
+  position: absolute;
+  top: 0;
+  border-bottom: 0.1rem solid #7e7d7d;
+  color: #000;
+  -moz-box-sizing: border-box;
+  min-height: 4rem;
+  width: 100%;
+  overflow: hidden;
+
+  background-color: #fff;
+  z-index: 1;
+}
+
+/*div*/
+#sdcard-fileSort,
+#sdcard-fileFilter,
+#fileSort,
+#fileFilter {
+  position: absolute;
+  top: 0;
+  left: 1rem;
+  height: 4rem;
+  /*width: 15rem;*/
+  display: inline;
+
+  background-repeat: no-repeat;
+  background-size: 3.6rem auto;
+}
+
+/*div*/
+#sdcard-fileSort,
+#fileSort {
+  width: 6rem;
+  margin-top: 0.2rem;
+
+  background-image: url('images/type_n.png');
+}
+
+#sdcard-fileSort:active,
+#fileSort:active {
+  background-image: url('images/type_f.png');
+}
+
+#sdcard-fileSort.disabled,
+#fileSort.disabled {
+  background-image: url('images/type_d.png');
+}
+
+/*div*/
+#sdcard-fileFilter,
+#fileFilter {
+  height: 3rem;
+  /*left: 18rem;*/
+  left: calc(100% - 1rem - 15rem - 1rem);
+  right: 1rem;
+}
+
+/*select*/
+#sdcard-sort,
+#sort {
+  width: 6rem;
+  height: 4rem;
+
+  font-size: 1.2rem;
+  font-family: 'MozTT', Sans-serif;
+  text-align: center;
+
+  border: none;
+  outline: none;
+  opacity: 0;
+}
+
+/* a */
+#sdcard-file-filter,
+#file-filter {
+  width: 13rem;
+  height: 3rem;
+
+  font-size: 1.9rem;
+  font-family: 'MozTT', Sans-serif;
+  text-align: left;
+
+  pointer-events: auto;
+}
+
+#sdcard-file-filter
+{
+  width: 13rem;
+}
+
+/* input */
+#sdcard-filter-input,
+#file-filter-input {
+  pointer-events: none;
+
+  width: 13rem;
+  height: 3rem;
+}
+
+#sdcard-filter-input {
+  pointer-events: none;
+  width: 13rem;
+  height: 3rem;
+}
+
+#sdcard-file-filter:active,
+#file-filter:active {
+  background-color: #b2f2ff;
+}
+
+#search > div {
+  position: relative;
+  top: 1rem;
+  left: 1rem;
+
+  height: 3rem;
+  width: calc(100% -2rem);
+  color: #000;
+  font-size: 1.2rem;
+  font-family: 'MozTT', Sans-serif;
+}
+
+.search-highlight {
+  background-color: rgb(0, 138, 170);
+}
+
+#sdcard-edit-select,
+#edit-select {
+  /*position: fixed;*/
+  position: absolute;
+  top: 5rem;
+  border-bottom: 0.1rem solid #7e7d7d;
+  -moz-box-sizing: border-box;
+  min-height: 4rem;
+  width: 100%;
+  overflow: hidden;
+  background-color: #000;
+  z-index: 1;
+}
+
+#sdcard-editCheckbox,
+#editCheckbox {
+  position: absolute;
+  top: 0;
+  left: 0.5rem;
+  margin-top: 0.5rem;
+  height: 3rem;
+  width: 5rem;
+  display: inline;
+}
+
+#sdcard-selectedNum,
+#selectedNum {
+  position: absolute;
+  top: 0;
+  /*left: 18.5rem;*/
+  right: 0.5rem;
+  margin-top: 0.5rem;
+  /* tcl_longxiuping delete for bug 679331 */
+  /*width: 13rem;*/
+  height: 3rem;
+  display: inline;
+}
+
+#sdcard-selectedNum > p,
+#selectedNum > p {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  color: #fff;
+  font-size: 1.6rem;
+  font-family: 'MozTT', Sans-serif;
+  text-align: right;
+  float:right;
+  pointer-events: none;
+}
+
+#sdcard-editCheckbox label:not([for]) input + span,
+#editCheckbox label:not([for]) input + span {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin: -2.2rem 0 0 -2.2rem;
+  width: 2.2rem;
+  height: 2.2rem;
+  pointer-events: none;
+}
+
+/* buttons */
+a.button {
+  display: block;
+  padding: 0;
+  margin: 0;
+  border-width: 0;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 3rem auto;
+  /* for buttons that display text */
+  font-size: 1.4rem;
+  text-align: center;
+  line-height: 4rem;
+}
+
+a.button:active, a.button:focus {
+  outline: none;
+}
+
+a.button.disabled {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+footer {
+  background: rgba(0, 0, 0, 0.75);
+  height: 4rem;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  box-shadow: 0 -0.2rem 0.5rem rgba(50, 50, 50, 0.75);
+}
+
+#classify-delete {
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  left: 0;
+  background-image: url('images/icons/iconaction_delete_30x30.png');
+  border-right: 0.1rem solid #000;
+  pointer-events: auto;
+}
+
+#classify-share {
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  left: 50%;
+  background-image: url('images/icons/iconaction_share_30x30.png');
+  pointer-events: auto;
+}
+
+.hidden {
+  display: none;
+}
+
+.search-highlight {
+  background-color: rgb(0, 138, 170);
+}
+
+#filter {
+  background-color: #fff;
+}

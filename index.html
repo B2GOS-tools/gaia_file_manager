@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="pragma" content="no-cache">
+    <title>File Manager</title>
+
+    <!-- Shared css code -->
+    <link rel="stylesheet" type="text/css" href="shared/style/headers.css">
+    <link rel="stylesheet" type="text/css" href="shared/style/confirm.css">
+    <link rel="stylesheet" type="text/css" href="shared/style/edit_mode.css">
+    <link rel="stylesheet" type="text/css" href="shared/style_unstable/lists.css">
+    <link rel="stylesheet" type="text/css" href="shared/style/switches.css">
+    <link rel="stylesheet" type="text/css" href="shared/style_unstable/tabs.css">
+    <link rel="stylesheet" type="text/css" href="shared/style/input_areas.css">
+
+    <!-- Specific css code -->
+    <link rel="stylesheet" type="text/css" href="/style/lists.css">
+    <link rel="stylesheet" type="text/css" href="/style/file_manager.css">
+    <link rel="stylesheet" type="text/css" href="/style/root_view_body.css">
+    <link rel="stylesheet" type="text/css" href="/style/filelist.css">
+    <link rel="stylesheet" type="text/css" href="/style/detail.css">
+    <link rel="stylesheet" type="text/css" href="/style/modal_dialog.css">
+    <!--<link rel="stylesheet" type="text/css" href="/style/prompt.css">-->
+
+
+
+    <!-- localization -->
+    
+    
+    <!-- <script defer="" src="shared/js/l10n.js"></script> -->
+    <!-- <script defer="" src="shared/js/l10n_date.js"></script> -->
+
+    <!-- Shared js code -->
+    <!-- <script defer="" src="shared/js/lazy_loader.js"></script> -->
+    <!-- <script defer="" src="shared/js/visibility_monitor.js"></script> -->
+    <!-- <script defer="" src="shared/js/async_storage.js"></script> -->
+    <!-- <script defer="" src="shared/js/media/get_video_rotation.js"></script> -->
+    <!-- <script defer="" src="shared/js/custom_dialog.js"></script> -->
+    <!-- <script defer="" src="shared/js/text_normalizer.js"></script> -->
+    <!-- <script defer="" src="shared/js/device_storage/enumerate_all.js"></script> -->
+    <!-- <script defer="" src="shared/js/media/media_utils.js"></script> -->
+
+      <!-- Specific js code -->
+    <!-- <script defer="" src="/js/blobview.js"></script> -->
+    <!-- <script defer="" src="/js/media_storage.js"></script> -->
+    <!-- <script defer="" src="/js/mediadb.js"></script> -->
+    <!-- <script defer="" src="/js/utils.js"></script> -->
+    <!-- <script defer="" src="/js/classify.js"></script> -->
+    <!-- <script defer="" src="/js/Uni2Pinyin.js"></script> -->
+    <!-- <script defer="" src="/js/sequencelist.js"></script> -->
+    <!-- <script defer="" src="/js/modal_dialog.js"></script> -->
+    <!-- <script defer="" src="/js/handlegesture.js"></script> -->
+    <!-- <script defer="" src="/js/filescan.js"></script> -->
+    <!-- <script defer="" src="/js/file_manager.js"></script> -->
+    <!-- <script defer="" src="/js/video_metadata.js"></script> -->
+    <!-- <script defer="" src="/js/pageSwitch.js"></script> --><script type="" defer="" src="./gaia_build_defer_index.js"></script>
+  <link rel="prefetch" type="application/l10n" href="/locales-obj/{{locale}}.json"></head>
+
+  <body role="application">
+
+  <section role="region" id="root" class="current">
+    <header class="view-header regular-header">
+      <menu type="toolbar">
+        <a id="fresh">
+          <span id="fresh-button" class="icon icon-reload"></span>
+        </a>
+      </menu>
+      <h1 data-l10n-id="file-manager">File Manager</h1>
+    </header>
+    <nav id="filter" class="filter-container">
+      <ul role="tablist" data-type="filter" data-items="2">
+        <li id="classify-filter" role="tab" aria-selected="true">
+          <a href="#classify" data-action="classify" data-l10n-id="classify">Classify</a>
+        </li>
+        <li id="storage-filter" role="tab">
+          <a href="#storage" data-action="storage" data-l10n-id="storage">Storage</a>
+        </li>
+      </ul>
+    </nav>
+    <div id="classify" class="view-body">
+      <article id="classify-container" class="view-body-inner">
+        <ul data-type="mainList">
+          <li id="picture">
+            <a id="option-picture" href="#fileListView" data-action="picture">
+              <img src="style/images/photo.png">
+              <span id="picture-num" data-l10n-id="picture">Picture (…)</span>
+            </a>
+          </li>
+          <li id="music">
+            <a id="option-music" href="#fileListView" data-action="music">
+              <img src="style/images/music.png">
+              <span id="music-num" data-l10n-id="music">Music (…)</span>
+            </a>
+          </li>
+          <li id="video">
+            <a id="option-video" href="#fileListView" data-action="video">
+              <img src="style/images/video.png">
+              <span id="video-num" data-l10n-id="video">Video (…)</span>
+            </a>
+          </li>
+          <li id="bluetooth">
+            <a id="option-bluetooth" href="#fileListView" data-action="bluetooth">
+              <img src="style/images/bluetooth.png">
+              <span id="bluetooth-num" data-l10n-id="bluetooth">Bluetooth (…)</span>
+            </a>
+          </li>
+        </ul>
+      </article>
+    </div>
+
+    <div id="storage" class="view-body hidden">
+      <article id="storage-container" class="view-body-inner">
+        <ul data-type="mainList" class="storage">
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <section role="region" id="fileListView">
+    <header>
+      <a href="#root" id="file-back"><span class="icon icon-back">back</span></a>
+      <menu type="toolbar">
+        <a href="#edit-form" id="icon-edit" class="disabled">
+          <span class="icon icon-edit-new"></span>
+        </a>
+      </menu>
+      <h1 id="classify-title" data-l10n-id="classify-title">Classify</h1>
+    </header>
+
+    <div id="sort-filter" class="hidden">
+      <div id="fileSort">
+        <select name="sort" id="sort">
+          <option data-l10n-id="operator-date" value="date" selected="">Date</option>
+          <option data-l10n-id="operator-name" value="name">Name</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="edit-select" class="hidden">
+      <div id="editCheckbox">
+        <label class="pack-checkbox edit-checkbox">
+          <input class="select-deselect-all" type="checkbox">
+          <span></span>
+        </label>
+      </div>
+
+      <div id="selectedNum">
+        <p id="selectedFileNum" data-l10n-id="no-selected">selected</p>
+      </div>
+    </div>
+
+    <div>
+      <div id="spinner-overlay" class="hidden">
+        <div id="spinner">
+        </div>
+      </div>
+    </div>
+    <ul data-type="list">
+    </ul>
+
+    <form role="dialog" id="edit-form" data-type="edit">
+      <section>
+        <header>
+          <button id="cancel-button">
+            <span data-l10n-id="cancel" class="icon icon-close">Cancel</span>
+          </button>
+
+          <h1 id="edit-title" data-l10n-id="editMode">Edit mode</h1>
+        </header>
+      </section>
+
+      <footer id="edit-classify-menu">
+        <a id="classify-share" class="button"></a>
+        <a id="classify-delete" class="button"></a>
+      </footer>
+    </form>
+  </section>
+
+  <section role="region" id="sdcardList">
+    <header>
+      <a id="sdcard-back"><span class="icon icon-back">back</span></a>
+      <menu type="toolbar">
+        <a href="#sdcard-edit-form" id="sdcard-icon-edit">
+          <span class="icon icon-edit-new"></span>
+        </a>
+      </menu>
+      <h1 id="sdcard-title">  </h1>
+    </header>
+
+    <div id="sdcard-sort-filter" class="hidden">
+      <div id="sdcard-fileSort">
+        <select name="sort" id="sdcard-sort">
+          <option data-l10n-id="operator-date" value="date">Date</option>
+          <option data-l10n-id="operator-name" value="name" selected="">Name</option>
+        </select>
+      </div>
+
+      <div id="sdcard-addFile">
+        <button id="sdcard-add-file">New</button>
+      </div>
+
+      <menu type="toolbar">
+        <a id="sdcard-refresh">
+          <span id="sdcard-fresh-button" class="icon icon-reload"></span>
+        </a>
+      </menu>
+    </div>
+
+
+    <div id="sdcard-edit-select" class="hidden">
+      <div id="sdcard-editCheckbox">
+        <label class="pack-checkbox edit-checkbox">
+          <input class="select-deselect-all" type="checkbox">
+          <span></span>
+        </label>
+      </div>
+
+      <div id="sdcard-selectedNum">
+        <p id="sdcard-selectedFileNum" data-l10n-id="no-selected">selected</p>
+      </div>
+    </div>
+
+    <div>
+      <div id="sdcard-spinner-overlay" class="hidden">
+        <div id="sdcardspinner"></div>
+      </div>
+    </div>
+    <ul data-type="list">
+    </ul>
+
+    <menu type="toolbar" data-items="2" id="paste-menu" class="hidden">
+      <a role="menuitem" id="paste" type="button">
+        <span class="icon icon-file-name-sort" data-l10n-id="paste">Paste</span>
+      </a>
+      <a role="menuitem" id="cancel" type="button">
+        <span class="icon icon-refresh" data-l10n-id="cancel">Cancel</span>
+      </a>
+    </menu>
+
+    <form role="dialog" id="sdcard-edit-form" data-type="edit">
+      <section>
+        <header>
+          <button id="sdcard-cancel">
+            <span data-l10n-id="cancel" class="icon icon-close">Cancel</span>
+          </button>
+
+          <h1 id="sdcard-edit-title" data-l10n-id="editMode">Edit mode</h1>
+        </header>
+      </section>
+
+      <menu id="edit-sdcard-menu" type="toolbar" data-items="4">
+        <a role="menuitem" id="cut" type="button">
+          <span class="icon icon-cut">cut</span>
+        </a>
+        <a role="menuitem" id="copy" type="button">
+          <span class="icon icon-copy">copy</span>
+        </a>
+        <a role="menuitem" id="sdcard-share" type="button">
+          <span class="icon icon-share">share</span>
+        </a>
+        <a role="menuitem" id="sdcard-delete" type="button">
+          <span class="icon icon-delete">delete</span>
+        </a>
+      </menu>
+    </form>
+  </section>
+
+  <section role="region" id="folder-directory">
+    <header>
+      <!--<a href="#" i><span ></span></a>-->
+      <h1 id="folder-storage-name" data-l10n-id="storage-name"> </h1>
+    </header>
+
+    <ul id="folder-dirlist">
+    </ul>
+  </section>
+
+  <!-- display messages like "No SD Card" here -->
+  <form id="overlay" role="dialog" data-type="confirm" class="hidden">
+    <section id="overlay-content">
+      <h1 id="overlay-title"></h1>
+      <p id="overlay-text"></p>
+    </section>
+  </form>
+
+
+  <form id="detail-view" role="dialog" data-type="confirm" class="hidden">
+    <section>
+      <dl>
+        <dt data-l10n-id="location-label">Location</dt>
+        <dd id="detail-location" class="value"></dd>
+        <dt data-l10n-id="name-label">Name</dt>
+        <dd id="detail-name" class="value"></dd>
+        <dt id="file-label" data-l10n-id="files-count-label">Files count</dt>
+        <dd id="detail-count" class="value"></dd>
+      </dl>
+    </section>
+    <menu>
+      <button type="button" id="detail-close-button" data-l10n-id="close-button" class="full">Close</button>
+    </menu>
+  </form>
+
+  <!--<div  id="fileManagerPrompt" class="modal-dialog">-->
+  <form id="modal-dialog-prompt" class="modal-dialog-prompt generic-dialog hidden" role="dialog" data-type="confirm">
+      <section>
+      <h3 class="modal-dialog-prompt-title"></h3>
+      <p>
+          <span class="modal-dialog-prompt-message"></span>
+          <input class="modal-dialog-prompt-input">
+      </p>
+   </section>
+   <!--<menu data-items="2">-->
+      <menu>
+      <!--<button class="modal-dialog-prompt-cancel cancel" data-l10n-id="cancel">Cancel</button>-->
+      <!--<button class="modal-dialog-prompt-ok confirm" data-l10n-id="ok" class="affirmative">OK</button>-->
+          <button id="modal-dialog-prompt-cancel" data-l10n-id="cancel">Cancel</button>
+          <button id="modal-dialog-prompt-ok" data-l10n-id="ok">OK</button>
+     </menu>
+  </form>
+  <!--</div>-->
+
+
+
+
+</body><script type="application/l10n" lang="es">
+  {"file-manager":{"_":"Gestión archivos"},"classify":{"_":"Clasificar"},"storage":{"_":"Almacenamiento"},"picture":{"_":"Imagen (…)"},"music":{"_":"Música (…)"},"video":{"_":"Vídeo (…)"},"bluetooth":{"_":"Bluetooth (…)"},"classify-title":{"_":"Clasificar"},"operator-date":{"_":"Fecha"},"operator-name":{"_":"Nombre"},"no-selected":{"_":"Seleccionados"},"cancel":{"_":"Cancelar"},"editMode":{"_":"Modo edición"},"paste":{"_":"Pegar"},"location-label":{"_":"Ubicación"},"name-label":{"_":"Nombre"},"files-count-label":{"_":"Número de archivos"},"close-button":{"_":"Cerrar"},"ok":{"_":"Aceptar"}}
+</script><script type="application/l10n" lang="pt-BR">
+  {"file-manager":{"_":"Arquivos"},"classify":{"_":"Classificar"},"storage":{"_":"Armazenamento"},"picture":{"_":"imagem (…)"},"music":{"_":"Música (…)"},"video":{"_":"Vídeo (…)"},"bluetooth":{"_":"Bluetooth (…)"},"classify-title":{"_":"Classificar"},"operator-date":{"_":"Data"},"operator-name":{"_":"Nome"},"no-selected":{"_":"Selecionado"},"cancel":{"_":"Cancelar"},"editMode":{"_":"Modo de edição"},"paste":{"_":"Colar"},"location-label":{"_":"Local"},"name-label":{"_":"Nome"},"files-count-label":{"_":"Contagem de arquivos"},"close-button":{"_":"Fechar"},"ok":{"_":"OK"}}
+</script><script type="application/l10n" lang="en-US">
+  {"file-manager":{"_":"File Manager"},"classify":{"_":"Classify"},"storage":{"_":"Storage"},"picture":{"_":"Picture (…)"},"music":{"_":"Music (…)"},"video":{"_":"Video (…)"},"bluetooth":{"_":"Bluetooth (…)"},"classify-title":{"_":"Classify"},"operator-date":{"_":"Date"},"operator-name":{"_":"Name"},"no-selected":{"_":"selected"},"cancel":{"_":"Cancel"},"editMode":{"_":"Edit mode"},"paste":{"_":"Paste"},"location-label":{"_":"Location"},"name-label":{"_":"Name"},"files-count-label":{"_":"Files count"},"close-button":{"_":"Close"},"ok":{"_":"OK"}}
+</script>
+</html>

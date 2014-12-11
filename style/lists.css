@@ -1,0 +1,74 @@
+/**
+ * Table View
+ * line height = 6rem, border included
+ */
+
+ul[data-type="mainList"] {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  list-style: none;
+}
+
+ul[data-type="mainList"] li {
+  position: relative;
+  border-bottom: 0.1rem solid #e6e6e3;
+  color: #000;
+  -moz-box-sizing: border-box;
+  min-height: 6rem;
+}
+
+/*ul[data-type="mainList"] li:last-of-type {*/
+/*border-bottom: none;*/
+/*}*/
+
+ul[data-type="mainList"] li.active,
+ul[data-type="mainList"] li a:active {
+  background-color: #b2f2ff;
+  color: #222;
+}
+
+ul[data-type="mainList"] li > a,
+ul[data-type="mainList"] li > span {
+  display: block;
+  text-decoration: none;
+  outline: 0;
+  color: #000;
+  -moz-box-sizing: border-box;
+  height: 6rem;
+  font-size: 1.6rem;
+  line-height: 6rem;
+  padding: 0 0rem;    /* modify by tcl_liang.xin for pr_692138 */
+}
+
+ul[data-type="mainList"] li.disabled > a {
+  color: gray;
+  pointer-events: none;
+}
+
+/* description + value on the same line */
+ul[data-type="mainList"] li > a span {
+  position: absolute;
+  color: #000;
+}
+
+/* text ellipsis */
+ul[data-type="mainList"] li > * {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+ul[data-type="mainList"] li > a > * {
+  pointer-events: none;
+}
+
+.storage > li > a > span:last-child {
+  position: absolute;
+  top: 3.5rem;
+  height: 2.5rem;
+  font-size: 1.2rem;
+  line-height: 2.5rem;
+  padding: 0;
+}

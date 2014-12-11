@@ -1,0 +1,58 @@
+{
+  "name": "File Manager", 
+  "default_locale": "en-US", 
+  "icons": {
+    "60": "/style/icons/Filemanager_60.png", 
+    "90": "/style/icons/Filemanager_90.png", 
+    "120": "/style/icons/Filemanager_120.png"
+  }, 
+  "orientation": "portrait-primary", 
+  "description": "File Manager", 
+  "launch_path": "/index.html#root", 
+  "permissions": {
+    "audio-channel-content": {}, 
+    "deprecated-hwvideo": {}, 
+    "device-storage:apps": {
+      "access": "readwrite"
+    }, 
+    "device-storage:videos": {
+      "access": "readwrite"
+    }, 
+    "attention": {}, 
+    "storage": {}, 
+    "device-storage:sdcard": {
+      "access": "readwrite"
+    }, 
+    "device-storage:music": {
+      "access": "readwrite"
+    }, 
+    "permissions": {}, 
+    "device-storage:pictures": {
+      "access": "readwrite"
+    }, 
+    "webapps-manage": {}, 
+    "settings": {
+      "access": "readonly"
+    }, 
+    "device-storage:extrasdcard": {
+      "access": "readwrite"
+    }
+  }, 
+  "type": "certified", 
+  "locales": {
+    "en-US": {
+      "name": "File Manager", 
+      "description": "Gaia Settings"
+    }, 
+    "pt-BR": {
+      "name": "Arquivos"
+    }, 
+    "es": {
+      "name": "Gesti\u00f3n archivos"
+    }
+  }, 
+  "developer": {
+    "url": "https://github.com/mozilla-b2g/gaia", 
+    "name": "tcl Beetle lite ff Team"
+  }
+}

@@ -1,0 +1,27 @@
+
+.view-body {
+  background : white;
+  color: black;
+  height: -moz-calc(100% - 9.5rem);
+  -moz-transition: height .15s ease-in;
+  position: absolute;
+  overflow: hidden;
+  width: 100%;
+}
+
+.view-body-inner {
+  height: 100%;
+  overflow: auto;
+}
+
+.view-body-inner ul {
+  overflow: hidden;
+}
+
+.disabled {
+  pointer-events: none !important;
+}
+
+.disabled *{
+  pointer-events: none !important;
+}

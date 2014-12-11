@@ -1,0 +1,14 @@
+
+.modal-dialog-prompt input {
+  border-radius: 0.2rem;
+  height: 4rem;
+  font-size: 2rem;
+  width: 100%;
+  color: white;
+  background: none;
+  -moz-box-sizing: border-box;
+  margin-bottom: 1.5rem;  /* not overlap by menu while keyboard pop */
+}
+
+
+

@@ -1,0 +1,257 @@
+#sdcard-edit-form > menu > a[type="button"] {
+  position: absolute;
+  width: 25%;
+  height: 100%;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 3rem auto;
+}
+
+#cut {
+  left: 0;
+  background-image: url('images/icons/iconaction_cut_30x30.png');
+}
+
+#copy {
+  left: 25%;
+  background-image: url('images/icons/iconaction_copy_30x30.png');
+}
+
+#sdcard-share {
+  left: 50%;
+  background-image: url('images/icons/iconaction_share_30x30.png');
+}
+
+#sdcard-delete {
+  left: 75%;
+  background-image: url('images/icons/iconaction_delete_30x30.png');
+}
+
+#insert-div {
+  display: block;
+  white-space: nowrap;
+  margin: 0;
+  border-top: solid 0.1rem rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+}
+
+.insert-button {
+  position:absolute;
+  /*width: calc((100% -10rem) / 2);*/
+  width: calc((100% - 8rem) / 2);
+
+  /*height: 3.8rem;*/
+  margin-top: 0rem;
+  margin-bottom: 1rem;
+  padding: 0rem;
+  -moz-box-sizing: border-box;
+  display: inline-block;
+  vertical-align: middle;
+  text-overflow: ellipsis;
+  white-space: nowrap;    /*brower text blank process*/
+  overflow: hidden;
+  background: url("/shared/style/edit_mode/images/ui/default.png") repeat-x scroll left bottom rgb(250, 250, 250);
+  border: 0.1rem solid rgb(166, 166, 166);
+  border-radius: 0.3rem 0.3rem 0.3rem 0.3rem;
+  font-size: 1.2rem;
+  font-family: 'MozTT',Sans-serif;
+  font-weight: 500;
+  line-height: 3.8rem;
+  color: rgb(51, 51, 51);
+  text-align: center;
+  text-shadow: 0.1rem 0.1rem 0 rgba(255, 255, 255, 0.3);
+  text-decoration: none;
+  outline: medium none;
+  pointer-events: auto;
+}
+#rename-button {
+  left: 2rem;
+  margin-right: 2rem
+}
+
+#detail-button {
+  margin-left: 2rem;
+  right: 2rem;
+}
+
+[data-move="right-move"]#sdcardList {
+  position: relative;
+  transform: translateX(40%);
+  z-index: 200;
+  box-shadow: 0.1rem 0.1rem 0.5rem 0.5rem #222;
+}
+
+[data-move="left-move"]#sdcardList {
+  transform: translateX(0.1%);
+}
+
+
+#folder-directory {
+  width: 40%;
+  display:none;
+  z-index: -1;
+  visibility: visible;
+}
+
+#folder-directory > header:first-child h1 {
+  padding: 0 1rem;
+}
+
+#folder-directory > ul {
+  position: relative;
+  height: calc(100% - 5rem);
+  top:5rem;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.75);
+  list-style: none;
+  border: none;
+  margin: 0rem;
+  padding: 0rem;
+  font-size: 1.7rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: black;
+  text-align:center;
+  vertical-align: middle;
+}
+
+#folder-directory > ul li {
+  text-align:center;
+  vertical-align:middle;
+  /*line-height: 6.1rem;*/
+  border-bottom: 0.1rem solid #7e7d7d;
+}
+
+#folder-directory > ul li a {
+  pointer-events: none;
+  text-decoration: none;
+  color: #000;
+  display: block;
+  position: relative;
+  border: none;
+  outline: none;
+}
+
+#folder-dirlist a > span {
+  float: none;
+  margin: 0rem;
+  padding: 0rem;
+  display: block;
+}
+
+/*div*/
+#sdcard-addFile {
+  position: absolute;
+  left: 5.5rem;
+  top: 0;
+  margin-top: 0.5rem;
+  height: 4rem;
+  /*width: 15rem;*/
+  display: inline;
+}
+
+#sdcard-add-file {
+  width: 6rem;
+  height: 4rem;
+  font-size: 1.2rem;
+  font-family: 'MozTT', Sans-serif;
+  text-align: center;
+  border: none;
+  outline: none;
+  opacity: 0;
+}
+
+#sdcard-addFile {
+  margin-top: 0.2rem;
+  width: 6rem;
+  height: 4rem;
+  background-image: url('images/folder_n.png');
+  background-repeat: no-repeat;
+  background-size: 3.6rem auto;
+}
+
+#sdcard-addFile:active {
+  background-image: url('images/folder_f.png');
+}
+
+#sdcard-addFile:disabled {
+  background-image: url('images/folder_d.png');
+}
+
+
+#sdcard-fileFilter {
+  left: 10.5rem;
+}
+
+#sdcard-sort-filter .icon {
+  position: relative;
+  float: none;
+  display: inline-block;
+  vertical-align: top;
+  width: 5.5rem;
+  height: 4rem;
+  margin: 0 -1rem;
+  background: none no-repeat scroll center center transparent;
+  font-size: 0;
+  overflow: hidden;
+}
+
+#sdcard-sort-filter .icon.icon-reload {
+  background-image: url(images/reload.png);
+  background-size: 3rem auto;
+}
+
+#sdcard-sort-filter menu[type="toolbar"] a:not([aria-disabled="true"]):active,
+#sdcard-sort-filter menu[type="toolbar"] button:not(:disabled):active {
+  background: #008aaa !important;
+  transition: background 0.2s ease;
+}
+
+#sdcard-sort-filter menu[type="toolbar"] a[aria-disabled="true"],
+#sdcard-sort-filter menu[type="toolbar"] button[disabled] {
+  opacity: 0.5;
+}
+
+#sdcard-sort-filter menu[type="toolbar"] a::-moz-focus-inner,
+#sdcard-sort-filter menu[type="toolbar"] button::-moz-focus-inner,
+#sdcard-sort-filter menu[type="toolbar"] a:active,
+#sdcard-sort-filter menu[type="toolbar"] button:active,
+#sdcard-sort-filter menu[type="toolbar"] a:focus,
+#sdcard-sort-filter menu[type="toolbar"] button:focus {
+  outline: none !important;
+  border: none !important;
+}
+
+#sdcard-sort-filter menu[type="toolbar"] {
+  height: 100%;
+  float: right;
+}
+
+#sdcard-sort-filter menu[type="toolbar"] a,
+#sdcard-sort-filter menu[type="toolbar"] button {
+  -moz-box-sizing: border-box;
+  position: relative;
+  float: left;
+  width: auto;
+  min-width: 5.5rem;
+  margin-bottom: 0;
+  padding: 0 1rem;
+  border-radius: 0;
+  background: none;
+  text-align: center;
+  text-shadow: none;
+  z-index: 5;
+}
+
+#sdcard-sort-filter menu[type="toolbar"] a:last-child,
+#sdcard-sort-filter menu[type="toolbar"] button:last-child {
+  margin-left: -0.2rem;
+  z-index: 1;
+}
+
+#sdcard-sort-filter menu[type="toolbar"] {
+  padding: 0;
+  margin: 0;
+}
+
+
