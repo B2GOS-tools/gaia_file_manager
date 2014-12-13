@@ -1,58 +1,59 @@
 {
-  "name": "File Manager", 
-  "default_locale": "en-US", 
+  "name": "File Manager",
+  "default_locale": "en-US",
   "icons": {
-    "60": "/style/icons/Filemanager_60.png", 
-    "90": "/style/icons/Filemanager_90.png", 
-    "120": "/style/icons/Filemanager_120.png"
-  }, 
-  "orientation": "portrait-primary", 
-  "description": "File Manager", 
-  "launch_path": "/index.html#root", 
+    "60": "/style/icons/Filemanager_60.png",
+    "90": "/style/icons/Filemanager_90.png",
+    "120": "/style/icons/Filemanager_120.png",
+    "284": "/style/icons/Filemanager_284.png"
+  },
+  "orientation": "portrait-primary",
+  "description": "File Manager",
+  "launch_path": "/index.html#root",
   "permissions": {
-    "audio-channel-content": {}, 
-    "deprecated-hwvideo": {}, 
+    "audio-channel-content": {},
+    "deprecated-hwvideo": {},
     "device-storage:apps": {
       "access": "readwrite"
-    }, 
+    },
     "device-storage:videos": {
       "access": "readwrite"
-    }, 
-    "attention": {}, 
-    "storage": {}, 
+    },
+    "attention": {},
+    "storage": {},
     "device-storage:sdcard": {
       "access": "readwrite"
-    }, 
+    },
     "device-storage:music": {
       "access": "readwrite"
-    }, 
-    "permissions": {}, 
+    },
+    "permissions": {},
     "device-storage:pictures": {
       "access": "readwrite"
-    }, 
-    "webapps-manage": {}, 
+    },
+    "webapps-manage": {},
     "settings": {
       "access": "readonly"
-    }, 
+    },
     "device-storage:extrasdcard": {
       "access": "readwrite"
     }
-  }, 
-  "type": "certified", 
+  },
+  "type": "certified",
   "locales": {
     "en-US": {
-      "name": "File Manager", 
+      "name": "File Manager",
       "description": "Gaia Settings"
-    }, 
+    },
     "pt-BR": {
       "name": "Arquivos"
-    }, 
+    },
     "es": {
-      "name": "Gesti\u00f3n archivos"
+      "name": "Gestor de archivos"
     }
-  }, 
+  },
   "developer": {
-    "url": "https://github.com/mozilla-b2g/gaia", 
+    "url": "https://github.com/mozilla-b2g/gaia",
     "name": "tcl Beetle lite ff Team"
   }
 }

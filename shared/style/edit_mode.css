@@ -22,24 +22,25 @@ form[role="dialog"][data-type="edit"] header {
   z-index: 10;
   padding: 0;
   height: 5rem;
-  color: #fff;
-  background-color: #F97C17;
+  color: #868692;
+  background-color: #f4f4f4;
   border: none;
 }
 
 form[role="dialog"][data-type="edit"] header h1 {
-  font-size: 2.5rem;
+  font-size: 2.3rem;
   line-height: 5rem;
-  text-align: left;
-  color: #fff;
+  text-align: center;
+  color: #868692;
   white-space: nowrap;
   text-overflow: ellipsis;
   display: block;
   overflow: hidden;
   margin: 0;
-  padding: 0 1rem 0 3rem;
+  padding: 0 5rem 0 5rem;
   height: 100%;
-  font-weight: lighter;
+  font-weight: 300;
+  font-style: italic;
 }
 
 form[role="dialog"][data-type="edit"] header button {
@@ -95,7 +96,7 @@ form[role="dialog"][data-type="edit"] header button:active:after,
 form[role="dialog"][data-type="edit"] header button:hover:after,
 form[role="dialog"][data-type="edit"] header menu[type="toolbar"] button:hover,
 form[role="dialog"][data-type="edit"] header menu[type="toolbar"] button:active {
-  background: #dc6a0e !important;
+  background: rgba(0,0,0,0.1) !important;
   color: #fff;
 }
 
@@ -120,7 +121,7 @@ form[role="dialog"][data-type="edit"] header > button:after {
   left: 0;
   top: 0;
   z-index: -1;
-  width: 3rem;
+  width: 5.5rem;
   height: 5rem;
 }
 
@@ -128,7 +129,7 @@ form[role="dialog"][data-type="edit"] header > button span {
   position: relative;
   float: none;
   display: block;
-  width: 3rem;
+  width: 5rem;
   height: 5rem;
   margin: 0;
   background: transparent no-repeat center center / 3rem auto;
@@ -220,7 +221,7 @@ form[role="dialog"][data-type="edit"] > menu > button[disabled] {
   color: #4d4d4d;
   text-shadow: none;
   border-color: #4d4d4d;
-  pointer-events: auto;
+  pointer-events: none;
 }
 
 form[role="dialog"][data-type="edit"] menu button:last-child {
@@ -239,26 +240,3 @@ form[role="dialog"][data-type="edit"] menu button {
 form[role="dialog"][data-type="edit"] menu button.full {
   width: 100%;
 }
-
-
-/* ----------------------------------
- * Dark scheme
- * ---------------------------------- */
-form[role="dialog"][data-type="edit"].skin-dark header:first-child {
-  background-color: #242D33;
-}
-
-form[role="dialog"][data-type="edit"].skin-dark header:first-child button:active:after,
-form[role="dialog"][data-type="edit"].skin-dark header:first-child button:hover:after,
-form[role="dialog"][data-type="edit"].skin-dark header:first-child menu[type="toolbar"] button:hover,
-form[role="dialog"][data-type="edit"].skin-dark header:first-child menu[type="toolbar"] button:active {
-  background: #1d525e !important;
-  color: #fff;
-}
-
-
-form[role="dialog"][data-type="edit"].skin-dark header .icon.icon-close {
-  background-image: url(edit_mode/images/icons/skin-dark/close.png);
-}
-
-
