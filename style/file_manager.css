@@ -5,7 +5,7 @@ html, body {
   height: 100%;
   font-size: 10px;
   overflow: hidden;
-  background-color: #f4f4f4;
+  background-color: #fff;
 }
 
 section[role="region"] {
@@ -83,14 +83,14 @@ ul li img {
  */
 #overlay {
   /* it takes up the whole screen */
-  position: absolute;
+  position: none;
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
 
   /* almost transparent gray */
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.6);
   z-index: 30;
 }
 
@@ -176,7 +176,7 @@ menu[type="toolbar"][data-items="4"] {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.75);
+  background: #fafafa;
   height: 4rem;
   z-index: 10;
 }
@@ -508,14 +508,14 @@ function-menu-select
   /*position: fixed;*/
   position: absolute;
   top: 0;
-  border-bottom: 0.1rem solid #7e7d7d;
-  color: #000;
+  border-bottom: 0.1rem solid #f4f4f4;
+  color: #B0B0B8;
   -moz-box-sizing: border-box;
   min-height: 4rem;
   width: 100%;
   overflow: hidden;
 
-  background-color: #fff;
+  background-color: #fafafa;
   z-index: 1;
 }
 
@@ -637,12 +637,12 @@ function-menu-select
   /*position: fixed;*/
   position: absolute;
   top: 5rem;
-  border-bottom: 0.1rem solid #7e7d7d;
+  border-bottom: 0.1rem solid #f4f4f4;
   -moz-box-sizing: border-box;
   min-height: 4rem;
   width: 100%;
   overflow: hidden;
-  background-color: #000;
+  background-color: #fafafa;
   z-index: 1;
 }
 
@@ -673,12 +673,13 @@ function-menu-select
 #sdcard-selectedNum > p,
 #selectedNum > p {
   margin-top: 0.5rem;
+  margin-right: 0.5rem;
   margin-bottom: 0.5rem;
-  color: #fff;
+  color: #646466;
   font-size: 1.6rem;
   font-family: 'MozTT', Sans-serif;
   text-align: right;
-  float:right;
+  float: right;
   pointer-events: none;
 }
 
@@ -718,14 +719,14 @@ a.button.disabled {
 }
 
 footer {
-  background: rgba(0, 0, 0, 0.75);
-  height: 4rem;
+  background: #fcfcfc;
+  border-top: 0.1rem solid #CFCFD4;
+  height: 5rem;
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
   z-index: 10;
-  box-shadow: 0 -0.2rem 0.5rem rgba(50, 50, 50, 0.75);
 }
 
 #classify-delete {
@@ -734,7 +735,7 @@ footer {
   height: 100%;
   left: 0;
   background-image: url('images/icons/iconaction_delete_30x30.png');
-  border-right: 0.1rem solid #000;
+  border-right: 0.1rem solid #fcfcfc;
   pointer-events: auto;
 }
 
